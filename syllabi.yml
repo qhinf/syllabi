@@ -1,0 +1,11 @@
+syllabi:
+  - # Naam voor deze syllabus, idealiter gelijk aan de van de repo zonder _syllabus
+    name: processing
+    # Link naar de git repo voor deze syllabus
+    git: https://github.com/qhinf/processing_syllabus.git
+    # Lijst van branches of tags voor de verschillende versies die beschikbaar
+    # zijn. De bovenste is de standaard versie die vanaf de homepagina gelinkt
+    # wordt.
+    revisions: 
+      - 2324-1
+      - 2223-2
