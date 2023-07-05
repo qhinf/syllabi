@@ -2,3 +2,7 @@ GitPython
 jupyter-book
 mergedeep
 pyyaml
+
+# Temporarily add dependencies for _source files, to get things running
+sphinx-exercise
+sphinx-togglebutton
