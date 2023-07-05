@@ -1,0 +1,4 @@
+GitPython
+jupyter-book
+mergedeep
+pyyaml
