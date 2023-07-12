@@ -1,0 +1,8 @@
+[submodule "basis_programmeren/2324-1"]
+	path = syllabi/basis_programmeren/2324-1
+	url = https://github.com/qhinf/basis_programmeren_syllabus.git
+	branch = 2324-1
+[submodule "processing/2223-2"]
+	path = syllabi/processing/2223-2
+	url = https://github.com/qhinf/processing_syllabus.git
+	branch = 2223-2
