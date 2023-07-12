@@ -44,7 +44,7 @@ jobs:
       - uses: nodef/git-config.action@v1.0.0
         with:
           credentials: |-
-            github.com=${{secrets.GITHUB_TOKEN}}
+            github.com=${{secrets.SYLLABI_PAT}}
 
       - run: |
           python build.py
