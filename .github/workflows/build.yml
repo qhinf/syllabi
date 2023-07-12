@@ -41,6 +41,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - uses: nodef/git-config.action@v1.0.0
+        with:
+          credentials: |-
+            github.com=${{secrets.GITHUB_TOKEN}}
+
       - run: |
           python build.py
 
