@@ -43,7 +43,7 @@ for module in os.listdir(get_repo_path()):
         
         new_ref_config = merge({}, config_base, ref_config)
 
-        new_ref_config["author"] = ", ".join(authors)
+        new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
         new_ref_config["copyright"] = copyright_year
 
         new_ref_config["html"]["baseurl"] = f"/{module}/{version}"
