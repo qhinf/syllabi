@@ -10,3 +10,7 @@
 	path = syllabi/processing/2324-1
 	url = https://github.com/qhinf/processing_syllabus.git
 	branch = 2324-1
+[submodule "basis_cs/2324-1"]
+	path = syllabi/basis_cs/2324-1
+	url = https://github.com/qhinf/basis_cs_syllabus.git
+	branch = 2324-1

@@ -1,5 +1,11 @@
 # Syllabi
 
+Pull nieuwe wijzigingen van GitHub, inclusief geüpdatet submodules:
+
+```
+git pull --recurse-submodules
+```
+
 Voeg een nieuwe module of module-editie toe:
 
 ```
