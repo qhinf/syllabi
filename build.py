@@ -83,7 +83,7 @@ for module in os.listdir(get_repo_path()):
         module_title = new_ref_config["title"]
         versions.append({ "slug": version, "title": version_title })
 
-    versions.reverse()
+    versions.sort(key = lambda version: version["slug"], reverse = True)
     modules.append({ "slug": module, "title": module_title, "versions": versions })
 
 modules.sort(key = lambda module: module["title"])
