@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Q-highschool Informatica</title>
 </head>
 <body>
@@ -14,12 +14,12 @@
         <ul class="module_list">
             {% for module in modules %}
                 <li>
-                    <a href="/{{ module.slug }}/{{ module.versions[0].slug }}">{{ module.title }}</a>
+                    <a href="{{ module.slug }}/{{ module.versions[0].slug }}">{{ module.title }}</a>
                     <details>
                         <summary>Alle versies</summary>
                         <ul>
                         {% for version in module.versions %}
-                            <li><a href="/{{ module.slug }}/{{ version.slug }}">{{ version.title }}</a></li>
+                            <li><a href="{{ module.slug }}/{{ version.slug }}">{{ version.title }}</a></li>
                         {% endfor %}
                         </ul>
                     </details>
