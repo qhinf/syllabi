@@ -1,4 +1,5 @@
 GitPython
+Jinja2
 jupyter-book
 mergedeep
 pyyaml

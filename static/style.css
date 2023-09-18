@@ -1,0 +1,46 @@
+body {
+    font-family: system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+    text-align: center;
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+}
+
+header {
+    padding: 3rem 0;
+}
+
+details > summary {
+    cursor: pointer;
+    padding: 0.5em;
+}
+
+.module_list {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .module_list > li {
+        margin-bottom: .8em;
+    }
+
+        .module_list > li > a {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #f68a2c;
+            text-decoration: none; 
+        }
+
+            .module_list > li > a:hover {
+                text-decoration: underline;
+            }
+
+        .module_list > li > details {
+            padding-left: 1em;
+        }
