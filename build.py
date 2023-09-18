@@ -22,7 +22,8 @@ def get_repo_path(module: str | None = None, version: str | None = None) -> str:
 year_block_pattern = re.compile(r"(\d{2})(\d{2})-(\d)")
 
 # Create directory for the HTML build files
-shutil.rmtree("_build")
+if path.exists("_build"):
+    shutil.rmtree("_build")
 shutil.copytree("static", "_build")
 
 # Read the base configuration file into a Python dictionary
