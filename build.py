@@ -46,6 +46,11 @@ for module in os.listdir(get_repo_path()):
             if commit.author.name is not None 
         }
 
+        if (match := year_block_pattern.match(version)) is not None:
+            version_title = f"{match.group(1)}/{match.group(2)} - Blok {match.group(3)}"
+        else:
+            version_title = version
+
         copyright_year = repo.commit(repo.head).authored_datetime.year
 
         with open(path.join(jb_path, "_config.yml"), mode = "r") as ref_config_file:
@@ -57,6 +62,8 @@ for module in os.listdir(get_repo_path()):
         new_ref_config["copyright"] = copyright_year
 
         new_ref_config["html"]["baseurl"] = f"/{module}/{version}"
+
+        new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
 
         # new_ref_config["repository"]["url"] = syllabus_info["repo"]
         # new_ref_config["repository"]["branch"] = rev
@@ -74,11 +81,6 @@ for module in os.listdir(get_repo_path()):
             shutil.copytree(path.join(jb_path, "_build", "html"), path.join("_build", module, version))
 
         os.remove(path.join(jb_path, "_config_ext.yml"))
-
-        if (match := year_block_pattern.match(version)) is not None:
-            version_title = f"{match.group(1)}/{match.group(2)} - Blok {match.group(3)}"
-        else:
-            version_title = version
 
         module_title = new_ref_config["title"]
         versions.append({ "slug": version, "title": version_title })
