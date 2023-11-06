@@ -22,3 +22,7 @@
 	path = syllabi/pythonplus/2324-1
 	url = https://github.com/qhinf/pythonplus_syllabus.git
 	branch = 2324-1
+[submodule "basis_cs/2324-2"]
+	path = syllabi/basis_cs/2324-2
+	url = https://github.com/qhinf/basis_cs_syllabus.git
+	branch = 2324-2
