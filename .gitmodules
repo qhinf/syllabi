@@ -30,3 +30,15 @@
 	path = syllabi/computer_arch/2324-2
 	url = https://github.com/qhinf/computer_arch_syllabus.git
 	branch = 2324-2
+[submodule "basis_programmeren/2324-2"]
+	path = syllabi/basis_programmeren/2324-2
+	url = https://github.com/qhinf/basis_programmeren_syllabus.git
+	branch = 2324-2
+[submodule "processing/2324-2"]
+	path = syllabi/processing/2324-2
+	url = https://github.com/qhinf/processing_syllabus.git
+	branch = 2324-2
+[submodule "project/2324-2"]
+	path = syllabi/project/2324-2
+	url = https://github.com/qhinf/project_syllabus.git
+	branch = 2324-2
