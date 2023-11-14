@@ -42,3 +42,11 @@
 	path = syllabi/project/2324-2
 	url = https://github.com/qhinf/project_syllabus.git
 	branch = 2324-2
+[submodule "webdesign/2324-1"]
+	path = syllabi/webdesign/2324-1
+	url = https://github.com/qhinf/webdesign_syllabus.git
+	branch = 2324-1
+[submodule "webdesign/2324-2"]
+	path = syllabi/webdesign/2324-2
+	url = https://github.com/qhinf/webdesign_syllabus.git
+	branch = 2324-2
