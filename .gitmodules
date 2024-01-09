@@ -54,3 +54,7 @@
 	path = syllabi/computer_arch/2324-3
 	url = https://github.com/qhinf/computer_arch_syllabus.git
 	branch = 2324-3
+[submodule "computational_science/2324-3"]
+	path = syllabi/computational_science/2324-3
+	url = https://github.com/qhinf/computational_science_syllabus.git
+	branch = 2324-3
