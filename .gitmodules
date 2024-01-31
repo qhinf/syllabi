@@ -70,3 +70,7 @@
 	path = syllabi/project/2324-3
 	url = https://github.com/qhinf/project_syllabus.git
 	branch = 2324-3
+[submodule "security/2324-3"]
+	path = syllabi/security/2324-3
+	url = https://github.com/qhinf/security_syllabus.git
+	branch = 2324-3
