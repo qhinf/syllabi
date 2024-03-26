@@ -86,3 +86,7 @@
 	path = syllabi/basis_programmeren/2324-4
 	url = https://github.com/qhinf/basis_programmeren_syllabus.git
 	branch = 2324-4
+[submodule "project/2324-4"]
+	path = syllabi/project/2324-4
+	url = https://github.com/qhinf/project_syllabus.git
+	branch = 2324-4
