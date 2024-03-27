@@ -90,11 +90,3 @@
 	path = syllabi/project/2324-4
 	url = https://github.com/qhinf/project_syllabus.git
 	branch = 2324-4
-[submodule "test/2324-3"]
-	path = syllabi/test/2324-3
-	url = https://github.com/qhinf/test_syllabus.git
-	branch = 2324-3
-[submodule "test/2324-4"]
-	path = syllabi/test/2324-4
-	url = https://github.com/qhinf/test_syllabus.git
-	branch = 2324-4
