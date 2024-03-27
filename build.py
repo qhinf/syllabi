@@ -36,53 +36,75 @@ for module in os.listdir(get_repo_path()):
     versions = []
 
     for version in os.listdir(get_repo_path(module)):
+        build_path = path.join("_build", module, version)
         repo_path = get_repo_path(module, version)
         jb_path = path.join(repo_path, "syllabus")
-        repo = Repo(repo_path)
+        jb_build_path = path.join(jb_path, "_build", "html")
+        jb_build_version = path.join(jb_build_path, "version")
 
-        authors = { 
-            commit.author.name 
-            for commit in repo.iter_commits(repo.head) 
-            if commit.author.name is not None 
-        }
+        repo = Repo(repo_path)
+        
+        with open(path.join(jb_path, "_config.yml"), mode = "r") as ref_config_file:
+            ref_config = yaml.safe_load(ref_config_file)
 
         if (match := year_block_pattern.match(version)) is not None:
             version_title = f"{match.group(1)}/{match.group(2)} - Blok {match.group(3)}"
         else:
             version_title = version
 
-        copyright_year = repo.commit(repo.head).authored_datetime.year
+        needs_build = True
+        # Skip this build if the built version is the same as the current repo
+        # head commit SHA
+        if path.exists(jb_build_version):
+            with open(jb_build_version, mode = "r", encoding = "utf-8") as version_file:
+                if version_file.read().strip() == repo.head.commit.hexsha:
+                    print(f"[{module}/{version}] Skipping build: already up to date", file = sys.stderr)
+                    needs_build = False
+            
+        if needs_build:
+            authors = { 
+                commit.author.name 
+                for commit in repo.iter_commits(repo.head) 
+                if commit.author.name is not None 
+            }
 
-        with open(path.join(jb_path, "_config.yml"), mode = "r") as ref_config_file:
-            ref_config = yaml.safe_load(ref_config_file)
-        
-        new_ref_config = merge({}, config_base, ref_config)
+            copyright_year = repo.commit(repo.head).authored_datetime.year
 
-        new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
-        new_ref_config["copyright"] = str(copyright_year)
+            new_ref_config = merge({}, config_base, ref_config)
 
-        new_ref_config["html"]["baseurl"] = f"/{module}/{version}"
+            new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
+            new_ref_config["copyright"] = str(copyright_year)
 
-        new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
+            new_ref_config["html"]["baseurl"] = f"/{module}/{version}"
 
-        # new_ref_config["repository"]["url"] = syllabus_info["repo"]
-        # new_ref_config["repository"]["branch"] = rev
-        
-        with open(path.join(jb_path, "_config_ext.yml"), mode = "w") as ref_config_ext_file:
-            yaml.dump(new_ref_config, ref_config_ext_file)
+            new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
 
-        print(f"[{module}/{version}] Starting Jupyter Book build")
-        jb_result = subprocess.run([ "jupyter-book", "build", "--config", path.join(jb_path, "_config_ext.yml"), jb_path ], timeout = 2 * 60)
-        if jb_result.returncode != 0:
-            print(f"[{module}/{version}] Jupyter Book build failed", file = sys.stderr)
-        else:
-            print(f"[{module}/{version}] Jupyter Book build succeeded, copying HTML files")
-            shutil.rmtree(path.join("_build", module, version), ignore_errors = True)
-            shutil.copytree(path.join(jb_path, "_build", "html"), path.join("_build", module, version))
+            # new_ref_config["repository"]["url"] = syllabus_info["repo"]
+            # new_ref_config["repository"]["branch"] = rev
 
-        os.remove(path.join(jb_path, "_config_ext.yml"))
+            with open(path.join(jb_path, "_config_ext.yml"), mode = "w") as ref_config_ext_file:
+                yaml.dump(new_ref_config, ref_config_ext_file)
 
-        module_title = new_ref_config["title"]
+            print(f"[{module}/{version}] Starting Jupyter Book build")
+            jb_result = subprocess.run([ "jupyter-book", "build", "--config", path.join(jb_path, "_config_ext.yml"), jb_path ], timeout = 2 * 60)
+            if jb_result.returncode != 0:
+                print(f"[{module}/{version}] Jupyter Book build failed", file = sys.stderr)
+                build_success = False
+            else:
+                print(f"[{module}/{version}] Jupyter Book build succeeded")
+                build_success = True
+                # Write the commit SHA to detect unchanged syllabi
+                with open(jb_build_version, mode = "w", encoding = "utf-8") as version_file:
+                    version_file.write(repo.head.commit.hexsha)
+            
+            os.remove(path.join(jb_path, "_config_ext.yml"))
+
+        if not needs_build or build_success:
+            print(f"[{module}/{version}] Copying HTML")
+            shutil.rmtree(build_path, ignore_errors = True)
+            shutil.copytree(jb_build_path, build_path)
+
+        module_title = ref_config["title"]
         versions.append({ "slug": version, "title": version_title })
 
     versions.sort(key = lambda version: version["slug"], reverse = True)
