@@ -1,0 +1,54 @@
+name: Update syllabus edition
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Name of the syllabus to update, i.e. <module>/<edition>"
+        required: true
+        type: string
+      ref:
+        description: "The SHA-1 the submodule should be updated to"
+        required: true
+        type: string
+      url:
+        description: "The .git url of the repository for this syllabus"
+        required: true
+        type: string
+      branch:
+        description: "The branch to set as the reference for the submodule"
+        required: true
+        type: string
+      add:
+        description: "Whether to add the submodule if it doesn't exist at that path"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Configure git
+        run: |
+          git config --global user.name "Update Bot"
+          git config --global user.email "<>"
+      - name: Add submodule
+        if: ${{ github.event.inputs.add && hashFiles(format('./syllabi/{0}', github.event.inputs.name)) == '' }}
+        run: |
+          git submodule add \
+            -b ${{ github.event.inputs.branch }} \
+            --name ${{ github.event.inputs.name }} \
+            ${{ github.event.inputs.url }} \
+            ./syllabi/${{ github.event.inputs.name }}
+      - name: Checkout submodule at given ref
+        working-directory: ./syllabi/${{ github.event.inputs.name }}
+        run: |
+          git checkout ${{ github.event.inputs.ref }}
+      - name: Commit and push
+        run: |
+          git commit -am "Update ${{ github.event.inputs.name }}"
+          git push
