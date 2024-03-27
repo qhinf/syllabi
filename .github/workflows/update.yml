@@ -33,9 +33,14 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ github.workflow_ref }}
+      - uses: actions/checkout@v4
         with:
           submodules: true
+          clean: true
       - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"
