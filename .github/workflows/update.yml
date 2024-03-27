@@ -46,7 +46,7 @@ jobs:
       - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.co"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - name: Add submodule
         if: ${{ github.event.inputs.add && hashFiles(format('./syllabi/{0}', github.event.inputs.name)) == '' }}
         run: |
