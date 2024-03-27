@@ -42,7 +42,7 @@ jobs:
           git submodule add \
             -b ${{ github.event.inputs.branch }} \
             --name ${{ github.event.inputs.name }} \
-            ${{ github.event.inputs.url }} \
+            $(echo ${{ github.event.inputs.url }} | sed "s/git:\/\//https:\/\//") \
             ./syllabi/${{ github.event.inputs.name }}
       - name: Checkout submodule at given ref
         working-directory: ./syllabi/${{ github.event.inputs.name }}
