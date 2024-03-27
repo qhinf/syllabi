@@ -55,11 +55,12 @@ jobs:
             --name ${{ github.event.inputs.name }} \
             $(echo ${{ github.event.inputs.url }} | sed "s/git:\/\//https:\/\//") \
             ./syllabi/${{ github.event.inputs.name }}
+      - name: Fetch updates for submodule
+        working-directory: ./syllabi/${{ github.event.inputs.name }}
+        run: git fetch
       - name: Checkout submodule at given ref
         working-directory: ./syllabi/${{ github.event.inputs.name }}
-        run: |
-          git fetch
-          git checkout ${{ github.event.inputs.ref }}
+        run: git checkout ${{ github.event.inputs.ref }}
       - name: Commit and push
         run: |
           git commit -am "Update ${{ github.event.inputs.name }}"
