@@ -94,3 +94,7 @@
 	path = syllabi/test/2324-3
 	url = https://github.com/qhinf/test_syllabus.git
 	branch = 2324-3
+[submodule "test/2324-4"]
+	path = syllabi/test/2324-4
+	url = https://github.com/qhinf/test_syllabus.git
+	branch = 2324-4
