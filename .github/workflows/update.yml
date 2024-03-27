@@ -28,6 +28,8 @@ on:
 permissions:
   # Allow this workflow to push
   contents: write
+  # Allow triggering the build action
+  actions: write
 
 jobs:
   update:
@@ -61,3 +63,9 @@ jobs:
         run: |
           git commit -am "Update ${{ github.event.inputs.name }}"
           git push
+      - name: Trigger build action
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/actions/workflows/{workflow_id}/dispatches
+          workflow_id: build.yml
+          ref: main
