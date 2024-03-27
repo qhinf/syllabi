@@ -25,6 +25,10 @@ on:
         type: boolean
         default: false
 
+permissions:
+  # Allow this workflow to push
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
