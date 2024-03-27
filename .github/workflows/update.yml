@@ -58,6 +58,7 @@ jobs:
       - name: Checkout submodule at given ref
         working-directory: ./syllabi/${{ github.event.inputs.name }}
         run: |
+          git fetch
           git checkout ${{ github.event.inputs.ref }}
       - name: Commit and push
         run: |
