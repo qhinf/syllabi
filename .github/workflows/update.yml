@@ -70,3 +70,5 @@ jobs:
           route: POST /repos/${{ github.repository }}/actions/workflows/{workflow_id}/dispatches
           workflow_id: build.yml
           ref: main
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
