@@ -90,10 +90,6 @@
 	path = syllabi/project/2324-4
 	url = https://github.com/qhinf/project_syllabus.git
 	branch = 2324-4
-[submodule "fil_tech/main"]
-	path = syllabi/fil_tech/main
-	url = https://github.com/qhinf/fil_tech_syllabus.git
-	branch = main
 [submodule "fil_tech/2324-4"]
 	path = syllabi/fil_tech/2324-4
 	url = https://github.com/qhinf/fil_tech_syllabus.git
