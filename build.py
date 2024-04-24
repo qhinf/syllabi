@@ -5,7 +5,7 @@ import subprocess
 import sys
 import yaml
 
-from git import Repo
+from git import Commit, Repo
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from mergedeep import merge
 from os import path
@@ -20,6 +20,18 @@ def get_repo_path(module: str | None = None, version: str | None = None) -> str:
         return path.join(syllabi_folder, module, version)
     
 year_block_pattern = re.compile(r"(\d{2})(\d{2})-(\d)")
+
+def get_commit_authors(commit: Commit):
+    if commit.author.name is not None:
+        yield commit.author.name
+    for coa in commit.co_authors:
+        if coa.name is not None:
+            yield coa.name
+
+def get_repo_authors(repo: Repo):
+    for commit in repo.iter_commits(repo.head):
+        for author in get_commit_authors(commit):
+            yield author
 
 # Create directory for the HTML build files
 if path.exists("_build"):
@@ -62,11 +74,7 @@ for module in os.listdir(get_repo_path()):
                     needs_build = False
             
         if needs_build:
-            authors = { 
-                commit.author.name 
-                for commit in repo.iter_commits(repo.head) 
-                if commit.author.name is not None 
-            }
+            authors = set(get_repo_authors(repo))
 
             copyright_year = repo.commit(repo.head).authored_datetime.year
 
