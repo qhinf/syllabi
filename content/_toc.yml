@@ -1,0 +1,11 @@
+# Inhoudsopgave
+# Alle pagina's van de syllabus moeten hier in staan!
+# https://jupyterbook.org/structure/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: Informatie
+    chapters:
+    - file: informatie/code-stelen
+    - file: informatie/meerdere-bestanden-inleveren

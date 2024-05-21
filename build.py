@@ -33,14 +33,69 @@ def get_repo_authors(repo: Repo):
         for author in get_commit_authors(commit):
             yield author
 
+def get_repo_remote_url(repo: Repo):
+    return repo.remote().url \
+            .removesuffix(".git") \
+            .replace("git@github.com:", "https://github.com/")
+
+# Read the base configuration file into a Python dictionary
+with open("_config_base.yml", mode = "r") as config_base_file:
+    config_base = yaml.safe_load(config_base_file)
+
+# Build the general content from the /content folder
+def build_content(): 
+    build_path = "_build/algemeen"
+    repo_path = "."
+    jb_path = "content"
+    jb_build_path = path.join(jb_path, "_build", "html")
+
+    repo = Repo(repo_path)
+
+    with open(path.join(jb_path, "_config.yml"), mode = "r") as config_file:
+        config = yaml.safe_load(config_file)
+
+    authors = set(get_repo_authors(repo))
+
+    copyright_year = repo.commit(repo.head).authored_datetime.year
+
+    new_config = merge({}, config_base, config)
+
+    new_config["author"] = "Q-highschool + " + ", ".join(authors)
+    new_config["copyright"] = str(copyright_year)
+
+    new_config["html"] = {}
+    new_config["html"]["baseurl"] = "/"
+
+    new_config["repository"] = {}
+    new_config["repository"]["url"] = get_repo_remote_url(repo)
+    new_config["repository"]["branch"] = "main"
+    new_config["repository"]["path_to_book"] = "content"
+
+    with open(path.join(jb_path, "_config_ext.yml"), mode = "w") as ref_config_ext_file:
+        yaml.dump(new_config, ref_config_ext_file)
+
+    print("[content] Starting Jupyter Book build")
+    jb_result = subprocess.run([ "jupyter-book", "build", "--config", path.join(jb_path, "_config_ext.yml"), jb_path ], timeout = 2 * 60)
+    if jb_result.returncode != 0:
+        print("[content] Jupyter Book build failed", file = sys.stderr)
+        build_success = False
+    else:
+        print("[content] Jupyter Book build succeeded")
+        build_success = True
+    
+    os.remove(path.join(jb_path, "_config_ext.yml"))
+
+    if build_success:
+        print("[content] Copying HTML")
+        shutil.rmtree(build_path, ignore_errors = True)
+        shutil.copytree(jb_build_path, build_path)
+
 # Create directory for the HTML build files
 if path.exists("_build"):
     shutil.rmtree("_build")
 shutil.copytree("static", "_build")
 
-# Read the base configuration file into a Python dictionary
-with open("_config_base.yml", mode = "r") as config_base_file:
-    config_base = yaml.safe_load(config_base_file)
+build_content()
 
 modules = []
 for module in os.listdir(get_repo_path()):
@@ -87,11 +142,9 @@ for module in os.listdir(get_repo_path()):
 
             new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
 
-            new_ref_config["repository"]["url"] = repo.remote().url.removesuffix(".git")
+            new_ref_config["repository"]["url"] = get_repo_remote_url(repo)
             new_ref_config["repository"]["branch"] = version
-            new_ref_config["html"]["use_edit_page_button"] = True
-            new_ref_config["html"]["use_repository_button"] = True
-            new_ref_config["html"]["use_issues_button"] = True
+            new_ref_config["repository"]["path_to_book"] = "syllabus"
 
             with open(path.join(jb_path, "_config_ext.yml"), mode = "w") as ref_config_ext_file:
                 yaml.dump(new_ref_config, ref_config_ext_file)
