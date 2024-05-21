@@ -87,8 +87,11 @@ for module in os.listdir(get_repo_path()):
 
             new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
 
-            # new_ref_config["repository"]["url"] = syllabus_info["repo"]
-            # new_ref_config["repository"]["branch"] = rev
+            new_ref_config["repository"]["url"] = repo.remote().url.removesuffix(".git")
+            new_ref_config["repository"]["branch"] = version
+            new_ref_config["html"]["use_edit_page_button"] = True
+            new_ref_config["html"]["use_repository_button"] = True
+            new_ref_config["html"]["use_issues_button"] = True
 
             with open(path.join(jb_path, "_config_ext.yml"), mode = "w") as ref_config_ext_file:
                 yaml.dump(new_ref_config, ref_config_ext_file)
