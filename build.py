@@ -63,10 +63,10 @@ def build_content():
     new_config["author"] = "Q-highschool + " + ", ".join(authors)
     new_config["copyright"] = str(copyright_year)
 
-    new_config["html"] = {}
+    if not "html" in new_config: new_config["html"] = {}
     new_config["html"]["baseurl"] = "/"
 
-    new_config["repository"] = {}
+    if not "repository" in new_config: new_config["repository"] = {}
     new_config["repository"]["url"] = get_repo_remote_url(repo)
     new_config["repository"]["branch"] = "main"
     new_config["repository"]["path_to_book"] = "content"
@@ -138,10 +138,15 @@ for module in os.listdir(get_repo_path()):
             new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
             new_ref_config["copyright"] = str(copyright_year)
 
+            if not "html" in new_ref_config: new_ref_config["html"] = {}
             new_ref_config["html"]["baseurl"] = f"/{module}/{version}"
 
+            if not "sphinx" in new_ref_config: new_ref_config["sphinx"] = {}
+            if not "config" in new_ref_config["sphinx"]: new_ref_config["sphinx"]["config"] = {}
+            if not "myst_substitutions" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["myst_substitutions"] = {}
             new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
 
+            if not "repository" in new_ref_config: new_ref_config["repository"] = {}
             new_ref_config["repository"]["url"] = get_repo_remote_url(repo)
             new_ref_config["repository"]["branch"] = version
             new_ref_config["repository"]["path_to_book"] = "syllabus"
