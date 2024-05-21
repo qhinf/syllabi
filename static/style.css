@@ -21,6 +21,19 @@ details > summary {
     padding: 0.5em;
 }
 
+a {
+    color: #176de8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #591bc2;
+}
+
 .module_list {
     list-style: none;
     padding-left: 0;
@@ -34,13 +47,23 @@ details > summary {
             font-size: 1.2em;
             font-weight: 600;
             color: #f68a2c;
-            text-decoration: none; 
         }
-
-            .module_list > li > a:hover {
-                text-decoration: underline;
-            }
 
         .module_list > li > details {
             padding-left: 1em;
         }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+
+    a {
+        color: #528fe4;
+    }
+    
+    a:visited {
+        color: #6d13fc;
+    }
+}
