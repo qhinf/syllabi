@@ -216,7 +216,14 @@ redirects = [
 redirect_template = jinja_env.get_template("redirect.html")
 for redirect in redirects:
     print(f"[redirects] Writing redirect for {redirect['original']}")
+    
     dest_folder = path.join("_build", redirect["original"].strip("/"))
+    # Add the appropriate number of .. based on the original location, so that
+    # this also works when hosted under eg. qhinf.github.io/syllabi (so it
+    # doesn't redirect to qhinf.github.io/basis_cs but to
+    # qhinf.github.io/syllabi/basis_cs)
+    redirect_url = "/".join(len(redirect["original"].strip("/").split("/")) * [ ".." ]) + redirect["to"]
+
     os.makedirs(dest_folder, exist_ok = True)
     with open(path.join(dest_folder, "index.html"), mode = "w") as redirect_index_file:
-        redirect_index_file.write(redirect_template.render(redirect = redirect))
+        redirect_index_file.write(redirect_template.render(redirect_url = redirect_url))
