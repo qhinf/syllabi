@@ -188,3 +188,30 @@ for module in modules:
     print(f"[{module['slug']}] Writing index.html")
     with open(path.join("_build", module["slug"], "index.html"), mode = "w") as module_index_file:
         module_index_file.write(module_index_template.render(module = module))
+
+redirects = [
+    { "original": "/informatie/code-stelen-van-het-internet-of-leerling", "to": "/algemeen/informatie/code-stelen.html" },
+    { "original": "/informatie/meerdere-bestanden-inleveren", "to": "/algemeen/informatie/meerdere-bestanden-inleveren.html" },
+    { "original": "/modules/python", "to": "/basis_programmeren" },
+    { "original": "/modules/basis-van-computing-science", "to": "/basis_cs" },
+    { "original": "/modules/webdesign", "to": "/webdesign" },
+    { "original": "/modules/processing", "to": "/processing" },
+    { "original": "/modules/databases-and-sql", "to": "/databases" },
+    # TODO { "original": "/modules/databases-and-sql/sql-inleveropdracht", "to": "/" },
+    { "original": "/modules/security", "to": "/security" },
+    { "original": "/modules/artificiele-intelligentie", "to": "/ai" },
+    { "original": "/modules/linux-and-servers", "to": "/linux_servers" },
+    #TODO { "original": "/modules/linux-and-servers/handleiding-ssh", "to": "/" },
+    { "original": "/modules/javascript", "to": "/javascript" },
+    { "original": "/modules/project", "to": "/project" },
+    { "original": "/modules/pythonplus", "to": "/pythonplus" },
+    { "original": "/modules/computer_arch", "to": "/computer_arch" },
+]
+
+redirect_template = jinja_env.get_template("redirect.html")
+for redirect in redirects:
+    print(f"[redirects] Writing redirect for {redirect['original']}")
+    dest_folder = path.join("_build", redirect["original"].strip("/"))
+    os.makedirs(dest_folder, exist_ok = True)
+    with open(path.join(dest_folder, "index.html"), mode = "w") as redirect_index_file:
+        redirect_index_file.write(redirect_template.render(redirect = redirect))
