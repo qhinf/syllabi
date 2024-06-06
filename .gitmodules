@@ -102,3 +102,7 @@
 	path = syllabi/databases/2324-4
 	url = https://github.com/qhinf/databases_syllabus.git
 	branch = 2324-4
+[submodule "linux_servers/2324-4"]
+	path = syllabi/linux_servers/2324-4
+	url = https://github.com/qhinf/linux_servers_syllabus.git
+	branch = 2324-4
