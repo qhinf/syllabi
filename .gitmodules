@@ -98,3 +98,7 @@
 	path = syllabi/ai/2324-3
 	url = https://github.com/qhinf/ai_syllabus.git
 	branch = 2324-3
+[submodule "databases/2324-4"]
+	path = syllabi/databases/2324-4
+	url = https://github.com/qhinf/databases_syllabus.git
+	branch = 2324-4
