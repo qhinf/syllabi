@@ -4,12 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ module.title }}</title>
     <meta http-equiv="refresh" content="0; url={{ module.versions[0].slug }}">
+    <link rel="stylesheet" type="text/css" href="../pico.min.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
-    <main>
-        <h1>{{ module.title }}</h1>
-        <p><a href="{{ module.versions[0].slug }}">Klik hier</a> voor de nieuwste versie.</p>
-    </main>
+    <header>
+            <h1>{{ module.title }}</h1>
+            <p><a href="{{ module.versions[0].slug }}">Klik hier</a> voor de nieuwste versie.</p>
+    </header>
 </body>
 </html>

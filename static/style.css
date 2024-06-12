@@ -1,69 +1,66 @@
-body {
-    font-family: system-ui, sans-serif;
+h1, h2, h3, h4, h5, h6 {
+    --pico-font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+h1 {
     text-align: center;
 }
 
-main {
-    max-width: 800px;
-    margin: auto;
-}
+.modules.grid {
+    grid-template-columns: 1fr;
 
-header {
-    padding: 3rem 0;
-}
-
-details > summary {
-    cursor: pointer;
-    padding: 0.5em;
-}
-
-a {
-    color: #176de8;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:visited {
-    color: #591bc2;
-}
-
-.module_list {
-    list-style: none;
-    padding-left: 0;
-}
-
-    .module_list > li {
-        margin-bottom: .8em;
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
     }
 
-        .module_list > li > a {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #f68a2c;
+    @media (min-width: 1280px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    article {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.modules article {
+    --module-header-height: 6rem;
+
+    > header {
+        height: var(--module-header-height);
+        background-color: #f1881c;
+        background-size: cover;
+
+        > .logo {
+            float: right;
+            height: 100%;
         }
+    }
 
-        .module_list > li > details {
-            padding-left: 1em;
+    > a {
+        --pico-text-decoration: none;
+
+        /* Stretch link over the full card body and header */
+        margin: 
+            calc(-1 * var(--pico-block-spacing-vertical) - var(--module-header-height)) 
+            calc(-1 * var(--pico-block-spacing-horizontal))
+            calc(-1 * var(--pico-block-spacing-vertical));
+        padding: 
+            calc(var(--pico-block-spacing-vertical) + var(--module-header-height))
+            var(--pico-block-spacing-horizontal)
+            var(--pico-block-spacing-vertical);
+    }
+
+    h3 {
+        --pico-font-size: 1.25rem;
+    }
+
+    > footer {
+        margin-top: auto;
+
+        details {
+            margin-bottom: 0;
         }
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #000000;
-        color: #FFFFFF;
-    }
-
-    a {
-        color: #528fe4;
-    }
-    
-    a:visited {
-        color: #6d13fc;
     }
 }

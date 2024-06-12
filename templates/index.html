@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="pico.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Q-highschool Informatica</title>
 </head>
@@ -9,23 +10,43 @@
     <header>
         <h1>Q-highschool Informatica</h1>
     </header>
-    <main>
-        <p>Kies een module:</p>
-        <ul class="module_list">
-            {% for module in modules %}
-                <li>
-                    <a href="{{ module.slug }}/{{ module.versions[0].slug }}">{{ module.title }}</a>
-                    <details>
-                        <summary>Alle versies</summary>
-                        <ul>
-                        {% for version in module.versions %}
-                            <li><a href="{{ module.slug }}/{{ version.slug }}">{{ version.title }}</a></li>
-                        {% endfor %}
-                        </ul>
-                    </details>
-                </li>
-            {% endfor %}
-        </ul>
+    <main class="container">
+        <h2>Modules</h2>
+        <div class="modules grid">
+        {% for module in modules %}
+            <article>
+                <header
+                {% if module.banner %}
+                    style="background-image: url({{ module.banner }});"
+                {% elif module.color %}
+                    style="background-color: {{ module.color }};"
+                {% endif %}   
+                >
+                {% if module.logo %}
+                    <img class="logo" alt="Logo voor {{ module.title }}" src="{{ module.logo }}" />
+                {% endif %}
+                </header>
+                <a href="{{ module.slug }}/{{ module.versions[0].slug }}">
+                    <hgroup>
+                        <h3>{{ module.title }}</h3>
+                        <p>{{ module.versions[0].title }}</p>
+                    </hgroup>
+                </a>
+                {% if module.versions | length > 1 %}
+                    <footer>
+                        <details>
+                            <summary>Oude versies</summary>
+                            <ul>
+                            {% for version in module.versions[1:] %}
+                                <li><a href="{{ module.slug }}/{{ version.slug }}">{{ version.title }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </details>
+                    </footer>
+                {% endif %}
+            </article>
+        {% endfor %}
+        </div>
     </main>
 </body>
 </html>

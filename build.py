@@ -102,7 +102,7 @@ for module in os.listdir(get_repo_path()):
     module_title = module
     versions = []
 
-    for version in os.listdir(get_repo_path(module)):
+    for version in sorted(os.listdir(get_repo_path(module))):
         build_path = path.join("_build", module, version)
         repo_path = get_repo_path(module, version)
         jb_path = path.join(repo_path, "syllabus")
@@ -169,15 +169,33 @@ for module in os.listdir(get_repo_path()):
             os.remove(path.join(jb_path, "_config_ext.yml"))
 
         if not needs_build or build_success:
+            module_title = ref_config["title"]
+            module_color = ref_config["accent_color"] if "accent_color" in ref_config else None
+            module_logo = \
+                path.join(module, version, "_static", path.basename(ref_config["logo"])) \
+                if "logo" in ref_config \
+                else None
+            module_banner = None
+            if "banner" in ref_config:
+                banner_path = path.join("_images", path.basename(ref_config["banner"]))
+                module_banner = path.join(module, version, banner_path)
+                if not path.exists(path.join(jb_build_path, banner_path)):
+                    shutil.copyfile(path.join(jb_path, ref_config["banner"]), path.join(jb_build_path, banner_path))
+            versions.append({ "slug": version, "title": version_title })
+
             print(f"[{module}/{version}] Copying HTML")
             shutil.rmtree(build_path, ignore_errors = True)
             shutil.copytree(jb_build_path, build_path)
 
-        module_title = ref_config["title"]
-        versions.append({ "slug": version, "title": version_title })
-
     versions.sort(key = lambda version: version["slug"], reverse = True)
-    modules.append({ "slug": module, "title": module_title, "versions": versions })
+    modules.append({ 
+        "slug": module,
+        "title": module_title,
+        "color": module_color,
+        "logo": module_logo,
+        "banner": module_banner,
+        "versions": versions
+    })
 
 modules.sort(key = lambda module: module["title"])
 
