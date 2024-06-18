@@ -1,3 +1,17 @@
+/* Expletus Sans logo fontface */
+@font-face {
+    font-display: block; 
+    font-family: 'Expletus Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('expletus-sans-v29-latin-600.woff2') format('woff2');
+}
+
+.logo-text {
+    font-family: "Expletus Sans", var(--pico-font-family);
+    font-weight: 600;
+}
+
 h1, h2, h3, h4, h5, h6 {
     --pico-font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
 }
