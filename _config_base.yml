@@ -11,3 +11,8 @@ html:
   use_issues_button: true
   
   # baseurl - dynamisch op basis van titel en branch
+
+sphinx:
+  config:
+    html_static_path: [ "../../../../theme/_static" ]
+    html_css_files: [ "custom.css" ]

@@ -48,5 +48,7 @@ sphinx:
     numfig_format:
       exercise: "Oefening %s"
 
+    html_static_path: [ "../theme/_static" ]
+
 # html, repository en launch_buttons instellingen worden globaal voor alle
 # syllabi afgehandeld.
