@@ -15,4 +15,7 @@ html:
 sphinx:
   config:
     html_static_path: [ "../../../../theme/_static" ]
+    templates_path: [ "../../../../theme/_templates" ]
     html_css_files: [ "custom.css" ]
+    html_theme_options:
+      navbar_start: [ "navbar_logo" ]

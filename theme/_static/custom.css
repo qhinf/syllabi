@@ -1,3 +1,12 @@
+/* Expletus Sans logo fontface */
+@font-face {
+    font-display: block; 
+    font-family: 'Expletus Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('expletus-sans-v29-latin-600.woff2') format('woff2');
+}
+
 :root {
     --cust-font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
@@ -14,10 +23,27 @@
     --pst-font-size-h4: 1.25rem;
     --pst-font-size-h5: 1.125rem;
     --pst-font-size-h6: 1rem;
+
+    --cust-font-family-logo: "Expletus Sans", var(--pst-font-family-heading);
+    --cust-font-weight-logo: 600;
 }
 
 /* Override the sphinx-book theme overrides */
 .bd-article-container h1,
 .bd-article-container h2 {
   font-weight: var(--pst-font-weight-heading);
+}
+
+.logo-text {
+    font-family: var(--cust-font-family-logo);
+    font-weight: var(--cust-font-weight-logo);
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+}
+
+a.navbar-brand {
+    color: var(--pst-color-text-base);
+    text-decoration: none;
 }

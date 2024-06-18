@@ -63,8 +63,10 @@ def build_content():
     new_config["author"] = "Q-highschool + " + ", ".join(authors)
     new_config["copyright"] = str(copyright_year)
 
-    if not "html" in new_config: new_config["html"] = {}
-    new_config["html"]["baseurl"] = "/"
+    if not "sphinx" in new_config: new_config["sphinx"] = {}
+    if not "config" in new_config["sphinx"]: new_config["sphinx"]["config"] = {}
+    if not "html_context" in new_config["sphinx"]["config"]: new_config["sphinx"]["config"]["html_context"] = {}
+    new_config["sphinx"]["config"]["html_context"]["book_basepath"] = f"informatie"
 
     if not "repository" in new_config: new_config["repository"] = {}
     new_config["repository"]["url"] = get_repo_remote_url(repo)
@@ -139,9 +141,6 @@ for module in os.listdir(get_repo_path()):
             new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
             new_ref_config["copyright"] = str(copyright_year)
 
-            if not "html" in new_ref_config: new_ref_config["html"] = {}
-            new_ref_config["html"]["baseurl"] = f"/{module}/{version}"
-
             if not "sphinx" in new_ref_config: new_ref_config["sphinx"] = {}
             if not "config" in new_ref_config["sphinx"]: new_ref_config["sphinx"]["config"] = {}
             if not "myst_substitutions" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["myst_substitutions"] = {}
@@ -150,6 +149,8 @@ for module in os.listdir(get_repo_path()):
                 if not "html_theme_options" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["html_theme_options"] = {}
                 new_ref_config["sphinx"]["config"]["html_theme_options"]["announcement"] = \
                     f"Let op: dit is een oude versie van deze syllabus voor {version_title}."
+            if not "html_context" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["html_context"] = {}
+            new_ref_config["sphinx"]["config"]["html_context"]["book_basepath"] = f"{module}/{version}"
 
             if not "repository" in new_ref_config: new_ref_config["repository"] = {}
             new_ref_config["repository"]["url"] = get_repo_remote_url(repo)

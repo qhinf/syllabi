@@ -1,0 +1,8 @@
+<a class="navbar-brand logo-text" 
+    href="{{ 
+        "./" +
+        "/".join(pathto(root_doc, 1).split("/")[:-1] + [""]) +
+        "/".join(book_basepath.strip("/").split("/")|length * [ ".." ])
+    }}">
+    Q-highschool Informatica
+</a>
