@@ -11,10 +11,15 @@
         <h1>Q-highschool Informatica</h1>
     </header>
     <main class="container">
-        <h2>Modules</h2>
+        <div class="heading-filter">
+            <h2>Modules</h2>
+            <form role="search" onsubmit="moduleFilterSubmitted(event)">
+                <input name="filter" type="search" placeholder="Filter modules" onkeydown="filterKeydowned(event)" oninput="filterModules(this.value)" />
+            </form>
+        </div>
         <div class="modules grid">
         {% for module in modules %}
-            <article>
+            <article data-title="{{ module.title }}" data-slug="{{ module.slug }}">
                 <header
                 {% if module.banner %}
                     style="background-image: url({{ module.banner }});"
@@ -47,6 +52,11 @@
             </article>
         {% endfor %}
         </div>
+        <p id="modules_notfound" class="hidden">
+            Geen modules gevonden. <a href="" onclick="resetFilter()">Filter verwijderen</a>.
+        </p>
     </main>
+
+    <script src="filter.js"></script>
 </body>
 </html>

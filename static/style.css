@@ -6,6 +6,22 @@ h1 {
     text-align: center;
 }
 
+.hidden {
+    display: none !important;
+}
+
+.heading-filter {
+    @media(min-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        form {
+            max-width: 33%;
+        }
+    }
+}
+
 .modules.grid {
     grid-template-columns: 1fr;
 
