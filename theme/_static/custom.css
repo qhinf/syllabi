@@ -39,11 +39,53 @@
     font-weight: var(--cust-font-weight-logo);
 }
 
+:root {
+    /* --q-color-primary: #f1881c; */
+    --q-color-primary-hue: 30;
+    --q-color-primary-saturation: 88%;
+    --q-color-primary-lightness: 53%;
+    --q-color-primary: hsl(var(--q-color-primary-hue), var(--q-color-primary-saturation), var(--q-color-primary-lightness));
+
+    /* --q-color-secondary-1: #6c2476; */
+    --q-color-secondary-1-hue: 293;
+    --q-color-secondary-1-saturation: 53%;
+    --q-color-secondary-1-lightness: 30%;
+    --q-color-secondary-1: hsl(var(--q-color-secondary-1-hue), var(--q-color-secondary-1-saturation), var(--q-color-secondary-1-lightness));
+
+    /* --q-color-secondary-2: #00add3; */
+    --q-color-secondary-2-hue: 191;
+    --q-color-secondary-2-saturation: 100%;
+    --q-color-secondary-2-lightness: 41%;
+    --q-color-secondary-2: hsl(var(--q-color-secondary-2-hue), var(--q-color-secondary-2-saturation), var(--q-color-secondary-2-lightness));
+}
+
+html, html[data-theme="light"], html[data-theme="dark"] {
+    --pst-color-primary: var(--q-color-secondary-2);
+    --pst-color-secondary: var(--q-color-secondary-1);
+}
+
+html[data-theme="light"] {
+    --q-color-secondary-2-lightness: 25%;
+}
+
+html[data-theme="dark"] {
+    --q-color-secondary-1-lightness: 61%;
+}
+
 .navbar-brand {
     font-size: 1.25rem;
 }
 
 a.navbar-brand {
-    color: var(--pst-color-text-base);
+    color: var(--q-color-primary);
     text-decoration: none;
 }
+
+    a.navbar-brand:hover {
+        color: var(--q-color-primary);
+    }
+
+    a.navbar-brand:hover:hover, /* Ugh. Geen idee waarom ze dit in de template doen. */
+    a.navbar-brand:visited:hover:hover {
+        color: var(--q-color-primary);
+    }
