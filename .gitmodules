@@ -110,3 +110,7 @@
 	path = syllabi/javascript/2324-4
 	url = https://github.com/qhinf/javascript_syllabus.git
 	branch = 2324-4
+[submodule "security/2425-1"]
+	path = syllabi/security/2425-1
+	url = https://github.com/qhinf/security_syllabus.git
+	branch = 2425-1
