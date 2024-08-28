@@ -186,7 +186,9 @@ for module in os.listdir(get_repo_path()):
                 banner_path = path.join("_images", path.basename(ref_config["banner"]))
                 module_banner = path.join(module, version, banner_path)
                 if not path.exists(path.join(jb_build_path, banner_path)):
-                    shutil.copyfile(path.join(jb_path, ref_config["banner"]), path.join(jb_build_path, banner_path))
+                    banner_build_path = path.join(jb_build_path, banner_path)
+                    os.makedirs(path.dirname(banner_build_path), exist_ok = True)
+                    shutil.copyfile(path.join(jb_path, ref_config["banner"]), banner_build_path)
             versions.append({ "slug": version, "title": version_title })
 
             print(f"[{module}/{version}] Copying HTML")
