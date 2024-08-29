@@ -134,3 +134,7 @@
 	path = syllabi/webdesign/2425-1
 	url = https://github.com/qhinf/webdesign_syllabus.git
 	branch = 2425-1
+[submodule "processing/2425-1"]
+	path = syllabi/processing/2425-1
+	url = https://github.com/qhinf/processing_syllabus.git
+	branch = 2425-1
