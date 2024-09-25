@@ -138,3 +138,7 @@
 	path = syllabi/processing/2425-1
 	url = https://github.com/qhinf/processing_syllabus.git
 	branch = 2425-1
+[submodule "basis_programmeren/2425-1-met-hoofdstuk-6"]
+	path = syllabi/basis_programmeren/2425-1-met-hoofdstuk-6
+	url = https://github.com/qhinf/basis_programmeren_syllabus.git
+	branch = 2425-1-met-hoofdstuk-6
