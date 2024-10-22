@@ -142,3 +142,7 @@
 	path = syllabi/databases/2425-1
 	url = https://github.com/qhinf/databases_syllabus.git
 	branch = 2425-1
+[submodule "cryptografie_getaltheorie/2425-2"]
+	path = syllabi/cryptografie_getaltheorie/2425-2
+	url = https://github.com/qhinf/cryptografie_getaltheorie_syllabus.git
+	branch = 2425-2
