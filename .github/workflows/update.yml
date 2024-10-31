@@ -34,6 +34,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.event.inputs.branch, 'draft/') }}
     steps:
       - uses: actions/cache@v4
         with:
