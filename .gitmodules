@@ -166,3 +166,7 @@
 	path = syllabi/basis_cs/2425-2
 	url = https://github.com/qhinf/basis_cs_syllabus.git
 	branch = 2425-2
+[submodule "webdesign/2425-3"]
+	path = syllabi/webdesign/2425-3
+	url = https://github.com/qhinf/webdesign_syllabus.git
+	branch = 2425-3
