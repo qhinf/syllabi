@@ -170,3 +170,7 @@
 	path = syllabi/webdesign/2425-3
 	url = https://github.com/qhinf/webdesign_syllabus.git
 	branch = 2425-3
+[submodule "security/2425-3"]
+	path = syllabi/security/2425-3
+	url = https://github.com/qhinf/security_syllabus.git
+	branch = 2425-3
