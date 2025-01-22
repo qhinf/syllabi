@@ -182,3 +182,7 @@
 	path = syllabi/basis_cs/2425-3
 	url = https://github.com/qhinf/basis_cs_syllabus.git
 	branch = 2425-3
+[submodule "computer_arch/2425-3"]
+	path = syllabi/computer_arch/2425-3
+	url = https://github.com/qhinf/computer_arch_syllabus.git
+	branch = 2425-3
