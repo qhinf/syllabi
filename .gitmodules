@@ -194,3 +194,7 @@
 	path = syllabi/fil_tech/2425-4
 	url = https://github.com/qhinf/fil_tech_syllabus.git
 	branch = 2425-4
+[submodule "basis_cs/2425-4"]
+	path = syllabi/basis_cs/2425-4
+	url = https://github.com/qhinf/basis_cs_syllabus.git
+	branch = 2425-4
