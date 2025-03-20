@@ -206,3 +206,7 @@
 	path = syllabi/pythonplus/2425-4
 	url = https://github.com/qhinf/pythonplus_syllabus.git
 	branch = 2425-4
+[submodule "project/2425-4"]
+	path = syllabi/project/2425-4
+	url = https://github.com/qhinf/project_syllabus.git
+	branch = 2425-4
