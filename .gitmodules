@@ -214,3 +214,7 @@
 	path = syllabi/javascript/2425-4
 	url = https://github.com/qhinf/javascript_syllabus.git
 	branch = 2425-4
+[submodule "domotica/2425-4"]
+	path = syllabi/domotica/2425-4
+	url = https://github.com/qhinf/domotica_syllabus.git
+	branch = 2425-4
