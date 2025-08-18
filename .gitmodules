@@ -218,3 +218,7 @@
 	path = syllabi/domotica/2425-4
 	url = https://github.com/qhinf/domotica_syllabus.git
 	branch = 2425-4
+[submodule "security/2526-1"]
+	path = syllabi/security/2526-1
+	url = https://github.com/qhinf/security_syllabus.git
+	branch = 2526-1
