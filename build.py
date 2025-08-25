@@ -130,6 +130,9 @@ for module in os.listdir(get_repo_path()):
         jb_path = path.join(repo_path, "syllabus")
         jb_build_path = path.join(jb_path, "_build", "html")
         jb_build_version = path.join(jb_build_path, "version")
+        slides_path = path.join(repo_path, "slides")
+        slides_dist_path = path.join(slides_path, "dist")
+        jb_build_slides_path = path.join(jb_build_path, "slides")
 
         repo = Repo(repo_path)
         
@@ -190,7 +193,31 @@ for module in os.listdir(get_repo_path()):
                 # Write the commit SHA to detect unchanged syllabi
                 with open(jb_build_version, mode = "w", encoding = "utf-8") as version_file:
                     version_file.write(repo.head.commit.hexsha)
-            
+
+            # Build slides if present
+            if path.exists(slides_path):
+                print(f"[{module}/{version}] Installing slides dependencies")
+                slides_install_result = subprocess.run(
+                    ["pnpm", "install"],
+                    cwd=slides_path,
+                    timeout=2 * 60
+                )
+                if slides_install_result.returncode != 0:
+                    print(f"[{module}/{version}] Slides install failed", file=sys.stderr)
+                else:
+                    print(f"[{module}/{version}] Building slides")
+                    slides_result = subprocess.run(
+                        ["pnpm", "build"],
+                        cwd=slides_path,
+                        timeout=2 * 60
+                    )
+                    if slides_result.returncode != 0:
+                        print(f"[{module}/{version}] Slides build failed", file=sys.stderr)
+                    elif path.exists(slides_dist_path):
+                        print(f"[{module}/{version}] Copying slides")
+                        shutil.rmtree(jb_build_slides_path, ignore_errors=True)
+                        shutil.copytree(slides_dist_path, jb_build_slides_path)
+
             os.remove(path.join(jb_path, "_config_ext.yml"))
 
         if not needs_build or build_success:
