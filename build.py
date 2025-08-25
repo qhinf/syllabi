@@ -100,11 +100,30 @@ shutil.copytree("static", "_build")
 build_content()
 
 modules = []
+build_state_dir = "_build_state"
+os.makedirs(build_state_dir, exist_ok=True)
+
 for module in os.listdir(get_repo_path()):
     module_title = module
     versions = []
 
     version_paths = sorted(os.listdir(get_repo_path(module)))
+    latest_version = version_paths[-1] if version_paths else None
+    latest_version_state_dir = path.join(build_state_dir, module)
+    latest_version_file = path.join(latest_version_state_dir, "latest_version")
+    latest_version_prev = None
+    force_rebuild = False
+
+    os.makedirs(latest_version_state_dir, exist_ok=True)
+    # Check if the latest version has changed since last build
+    if path.exists(latest_version_file):
+        with open(latest_version_file, mode="r", encoding="utf-8") as f:
+            latest_version_prev = f.read().strip()
+        if latest_version_prev != latest_version:
+            force_rebuild = True
+    else:
+        force_rebuild = True
+
     for version in version_paths:
         build_path = path.join("_build", module, version)
         repo_path = get_repo_path(module, version)
@@ -124,8 +143,8 @@ for module in os.listdir(get_repo_path()):
 
         needs_build = True
         # Skip this build if the built version is the same as the current repo
-        # head commit SHA
-        if path.exists(jb_build_version):
+        # head commit SHA, unless a newer version was added
+        if path.exists(jb_build_version) and not force_rebuild:
             with open(jb_build_version, mode = "r", encoding = "utf-8") as version_file:
                 if version_file.read().strip() == repo.head.commit.hexsha:
                     print(f"[{module}/{version}] Skipping build: already up to date", file = sys.stderr)
@@ -194,6 +213,10 @@ for module in os.listdir(get_repo_path()):
             print(f"[{module}/{version}] Copying HTML")
             shutil.rmtree(build_path, ignore_errors = True)
             shutil.copytree(jb_build_path, build_path)
+
+    # After building all versions, update the latest_version file (outside _build)
+    with open(latest_version_file, mode="w", encoding="utf-8") as f:
+        f.write(latest_version if latest_version else "")
 
     versions.sort(key = lambda version: version["slug"], reverse = True)
     modules.append({ 
