@@ -242,3 +242,7 @@
 	path = syllabi/databases/2526-1
 	url = https://github.com/qhinf/databases_syllabus.git
 	branch = 2526-1
+[submodule "pythonplus/2526-1"]
+	path = syllabi/pythonplus/2526-1
+	url = https://github.com/qhinf/pythonplus_syllabus.git
+	branch = 2526-1
