@@ -250,3 +250,7 @@
 	path = syllabi/ai/2526-2
 	url = https://github.com/qhinf/ai_syllabus.git
 	branch = 2526-2
+[submodule "ogp/2526-2"]
+	path = syllabi/ogp/2526-2
+	url = https://github.com/qhinf/ogp_syllabus.git
+	branch = 2526-2
