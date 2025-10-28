@@ -7,7 +7,7 @@ import yaml
 
 from git import Commit, Repo
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from mergedeep import merge
+from mergedeep import merge, Strategy
 from os import path
 
 def get_repo_path(module: str | None = None, version: str | None = None) -> str:
@@ -158,7 +158,7 @@ for module in os.listdir(get_repo_path()):
 
             copyright_year = repo.commit(repo.head).authored_datetime.year
 
-            new_ref_config = merge({}, config_base, ref_config)
+            new_ref_config = merge({}, config_base, ref_config, strategy = Strategy.TYPESAFE_ADDITIVE)
 
             new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
             new_ref_config["copyright"] = str(copyright_year)
