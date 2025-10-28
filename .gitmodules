@@ -254,7 +254,3 @@
 	path = syllabi/ogp/2526-2
 	url = https://github.com/qhinf/ogp_syllabus.git
 	branch = 2526-2
-[submodule "ogp/2526-2-draft"]
-	path = syllabi/ogp/2526-2-draft
-	url = https://github.com/qhinf/ogp_syllabus.git
-	branch = 2526-2-draft
