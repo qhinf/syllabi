@@ -254,3 +254,7 @@
 	path = syllabi/ogp/2526-2
 	url = https://github.com/qhinf/ogp_syllabus.git
 	branch = 2526-2
+[submodule "basis_programmeren/2526-2"]
+	path = syllabi/basis_programmeren/2526-2
+	url = https://github.com/qhinf/basis_programmeren_syllabus.git
+	branch = 2526-2
