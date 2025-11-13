@@ -270,3 +270,7 @@
 	path = syllabi/project/2526-2
 	url = https://github.com/qhinf/project_syllabus.git
 	branch = 2526-2
+[submodule "databases/2526-2"]
+	path = syllabi/databases/2526-2
+	url = https://github.com/qhinf/databases_syllabus.git
+	branch = 2526-2
