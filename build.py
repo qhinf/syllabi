@@ -100,6 +100,7 @@ shutil.copytree("static", "_build")
 build_content()
 
 modules = []
+old_versions = []
 build_state_dir = "_build_state"
 os.makedirs(build_state_dir, exist_ok=True)
 
@@ -236,6 +237,8 @@ for module in os.listdir(get_repo_path()):
                     os.makedirs(path.dirname(banner_build_path), exist_ok = True)
                     shutil.copyfile(path.join(jb_path, ref_config["banner"]), banner_build_path)
             versions.append({ "slug": version, "title": version_title })
+            if version != version_paths[-1]:
+                old_versions.append(f"/{module}/{version}/")
 
             print(f"[{module}/{version}] Copying HTML")
             shutil.rmtree(build_path, ignore_errors = True)
@@ -259,17 +262,27 @@ modules.sort(key = lambda module: module["title"])
 
 jinja_env = Environment(loader = FileSystemLoader("templates"), autoescape = select_autoescape())
 
+# Create the index page
 index_template = jinja_env.get_template("index.html")
 print(f"[index] Writing index.html")
 with open(path.join("_build", "index.html"), mode = "w") as index_file:
     index_file.write(index_template.render(modules = modules))
 
+# Create a robots.txt file to disallow crawling of old versions
+print(f"[index] Writing robots.txt")
+with open(path.join("_build", "robots.txt"), mode = "w") as robots_file:
+    robots_file.write("User-agent: *\n")
+    for old_module_version in old_versions:
+        robots_file.write(f"Disallow: {old_module_version}\n")
+
+# Create a module index for each module
 module_index_template = jinja_env.get_template("module_index.html")
 for module in modules:
     print(f"[{module['slug']}] Writing index.html")
     with open(path.join("_build", module["slug"], "index.html"), mode = "w") as module_index_file:
         module_index_file.write(module_index_template.render(module = module))
 
+# Configure redirects for old paths
 redirects = [
     { "original": "/informatie/code-stelen-van-het-internet-of-leerling", "to": "/algemeen/informatie/code-stelen.html" },
     { "original": "/informatie/meerdere-bestanden-inleveren", "to": "/algemeen/informatie/meerdere-bestanden-inleveren.html" },
