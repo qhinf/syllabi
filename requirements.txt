@@ -7,3 +7,4 @@ pyyaml ~=6.0.3
 # Temporarily add dependencies for _source files, to get things running
 sphinx-exercise ~=1.1.1
 sphinx-togglebutton ~=0.3.2
+sphinxcontrib-mermaid
