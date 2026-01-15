@@ -290,3 +290,7 @@
 	path = syllabi/webdesign/2526-3
 	url = https://github.com/qhinf/webdesign_syllabus.git
 	branch = 2526-3
+[submodule "computational_science/2526-3"]
+	path = syllabi/computational_science/2526-3
+	url = https://github.com/qhinf/computational_science_syllabus.git
+	branch = 2526-3
