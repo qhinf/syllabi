@@ -302,3 +302,7 @@
 	path = syllabi/computer_arch/2526-3
 	url = https://github.com/qhinf/computer_arch_syllabus.git
 	branch = 2526-3
+[submodule "basis_cs/2526-3"]
+	path = syllabi/basis_cs/2526-3
+	url = https://github.com/qhinf/basis_cs_syllabus.git
+	branch = 2526-3
