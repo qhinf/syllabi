@@ -294,3 +294,7 @@
 	path = syllabi/computational_science/2526-3
 	url = https://github.com/qhinf/computational_science_syllabus.git
 	branch = 2526-3
+[submodule "basis_programmeren/2526-3"]
+	path = syllabi/basis_programmeren/2526-3
+	url = https://github.com/qhinf/basis_programmeren_syllabus.git
+	branch = 2526-3
