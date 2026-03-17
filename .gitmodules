@@ -310,3 +310,7 @@
 	path = syllabi/fil_tech/2526-4
 	url = https://github.com/qhinf/fil_tech_syllabus.git
 	branch = 2526-4
+[submodule "basis_programmeren/2526-4"]
+	path = syllabi/basis_programmeren/2526-4
+	url = https://github.com/qhinf/basis_programmeren_syllabus.git
+	branch = 2526-4
