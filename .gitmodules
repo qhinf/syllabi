@@ -314,3 +314,7 @@
 	path = syllabi/basis_programmeren/2526-4
 	url = https://github.com/qhinf/basis_programmeren_syllabus.git
 	branch = 2526-4
+[submodule "security/2526-4"]
+	path = syllabi/security/2526-4
+	url = https://github.com/qhinf/security_syllabus.git
+	branch = 2526-4
