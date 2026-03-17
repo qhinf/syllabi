@@ -318,3 +318,7 @@
 	path = syllabi/security/2526-4
 	url = https://github.com/qhinf/security_syllabus.git
 	branch = 2526-4
+[submodule "ogp/2526-4"]
+	path = syllabi/ogp/2526-4
+	url = https://github.com/qhinf/ogp_syllabus.git
+	branch = 2526-4
