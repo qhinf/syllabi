@@ -334,3 +334,7 @@
 	path = syllabi/basis_cs/2526-4
 	url = https://github.com/qhinf/basis_cs_syllabus.git
 	branch = 2526-4
+[submodule "javascript/2526-4"]
+	path = syllabi/javascript/2526-4
+	url = https://github.com/qhinf/javascript_syllabus.git
+	branch = 2526-4
