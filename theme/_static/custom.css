@@ -1,12 +1,3 @@
-/* Expletus Sans logo fontface */
-@font-face {
-    font-display: block; 
-    font-family: 'Expletus Sans';
-    font-style: normal;
-    font-weight: 600;
-    src: url('expletus-sans-v29-latin-600.woff2') format('woff2');
-}
-
 :root {
     --cust-font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
@@ -23,9 +14,6 @@
     --pst-font-size-h4: 1.25rem;
     --pst-font-size-h5: 1.125rem;
     --pst-font-size-h6: 1rem;
-
-    --cust-font-family-logo: "Expletus Sans", var(--pst-font-family-heading);
-    --cust-font-weight-logo: 600;
 }
 
 /* Override the sphinx-book theme overrides */
@@ -34,58 +22,43 @@
   font-weight: var(--pst-font-weight-heading);
 }
 
-.logo-text {
-    font-family: var(--cust-font-family-logo);
-    font-weight: var(--cust-font-weight-logo);
-}
-
 :root {
-    /* --q-color-primary: #f1881c; */
-    --q-color-primary-hue: 30;
-    --q-color-primary-saturation: 88%;
-    --q-color-primary-lightness: 53%;
+    /* --q-color-primary: #ff7600; */
+    --q-color-primary-hue: 28;
+    --q-color-primary-saturation: 100%;
+    --q-color-primary-lightness: 50%;
     --q-color-primary: hsl(var(--q-color-primary-hue), var(--q-color-primary-saturation), var(--q-color-primary-lightness));
 
-    /* --q-color-secondary-1: #6c2476; */
-    --q-color-secondary-1-hue: 293;
-    --q-color-secondary-1-saturation: 53%;
-    --q-color-secondary-1-lightness: 30%;
+    /* --q-color-secondary-1: #465ea5; */
+    --q-color-secondary-1-hue: 225;
+    --q-color-secondary-1-saturation: 40%;
+    --q-color-secondary-1-lightness: 46%;
     --q-color-secondary-1: hsl(var(--q-color-secondary-1-hue), var(--q-color-secondary-1-saturation), var(--q-color-secondary-1-lightness));
 
-    /* --q-color-secondary-2: #00add3; */
-    --q-color-secondary-2-hue: 191;
-    --q-color-secondary-2-saturation: 100%;
-    --q-color-secondary-2-lightness: 41%;
+    /* --q-color-secondary-2: #813447; */
+    --q-color-secondary-2-hue: 345;
+    --q-color-secondary-2-saturation: 43%;
+    --q-color-secondary-2-lightness: 35%;
     --q-color-secondary-2: hsl(var(--q-color-secondary-2-hue), var(--q-color-secondary-2-saturation), var(--q-color-secondary-2-lightness));
 }
 
 html, html[data-theme="light"], html[data-theme="dark"] {
-    --pst-color-primary: var(--q-color-secondary-2);
-    --pst-color-secondary: var(--q-color-secondary-1);
+    --pst-color-primary: var(--q-color-secondary-1);
+    --pst-color-secondary: var(--q-color-secondary-2);
 }
 
 html[data-theme="light"] {
-    --q-color-secondary-2-lightness: 25%;
+    --q-color-secondary-1-lightness: 42%;
 }
 
 html[data-theme="dark"] {
-    --q-color-secondary-1-lightness: 61%;
+    --q-color-secondary-1-saturation: 100%;
+    --q-color-secondary-1-lightness: 83%;
+
+    --q-color-secondary-2-saturation: 100%;
+    --q-color-secondary-2-lightness: 89%;
 }
 
-.navbar-brand {
-    font-size: 1.25rem;
+.navbar-brand > img {
+    height: 1.25rem;
 }
-
-a.navbar-brand {
-    color: var(--q-color-primary);
-    text-decoration: none;
-}
-
-    a.navbar-brand:hover {
-        color: var(--q-color-primary);
-    }
-
-    a.navbar-brand:hover:hover, /* Ugh. Geen idee waarom ze dit in de template doen. */
-    a.navbar-brand:visited:hover:hover {
-        color: var(--q-color-primary);
-    }
