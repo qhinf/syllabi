@@ -32,7 +32,7 @@ jobs:
     steps:
       # Cache alles in de workspace, zodat ook de checkout en build output
       # gecached wordt
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         if: ${{ !contains(github.event.head_commit.message, '!nocache') }}
         with:
           path: ${{ github.workspace }}
@@ -40,7 +40,7 @@ jobs:
           restore-keys: |
             ${{ github.workflow_ref }}-
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Checkout alle submodules
           submodules: true
@@ -49,12 +49,12 @@ jobs:
           # Fetch de gehele historie, zodat de auteurs functie werkt
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: "pip"
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: 10
@@ -67,9 +67,9 @@ jobs:
       - run: |
           python build.py
 
-      - uses: actions/configure-pages@v4
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: "_build"
-      - uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v5
         id: deployment
