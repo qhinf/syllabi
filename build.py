@@ -181,6 +181,7 @@ for module in os.listdir(get_repo_path()):
             if not "config" in new_ref_config["sphinx"]: new_ref_config["sphinx"]["config"] = {}
             if not "myst_substitutions" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["myst_substitutions"] = {}
             new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
+            new_ref_config["sphinx"]["config"]["myst_substitutions"]["titel"] = new_ref_config["title"]
             if version != version_paths[-1]:
                 if not "html_theme_options" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["html_theme_options"] = {}
                 new_ref_config["sphinx"]["config"]["html_theme_options"]["announcement"] = \
