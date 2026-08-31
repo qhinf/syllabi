@@ -1,11 +1,11 @@
 # Boek configuratie
 # https://jupyterbook.org/customize/config.html
 
-title: Q-highschool Informatica
+title: Q-vak Informatica
 
 # Auteur is verplicht, maar wordt voor de syllabus site automatisch aangepast op
 # basis van de commitgeschiedenis.
-author: Q-highschool
+author: Q-vak Informatica
 
 # Standaard worden alleen bestanden die in _toc.yml genoemd worden "gecompileerd"
 only_build_toc_files: true

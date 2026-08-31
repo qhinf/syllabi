@@ -1,6 +1,6 @@
 # Meerdere bestanden inleveren
 
-In je [Q-Highschool portfolio](https://app.q-highschool.nl) kun je per module maar één bestand inleveren. Bij informatica heb je vaak meerdere bestanden, bijvoorbeeld omdat je jouw code over meerdere bestanden hebt verdeeld, of omdat je bijvoorbeeld een eindproduct en een verslag in moet leveren. Om dat toch in te kunnen leveren, kun je de bestanden samenvoegen in een `.zip` bestand. Zie hieronder een uitleg voor jouw besturingssysteem.
+In je [Q-vakken portfolio](https://app.q-highschool.nl) kun je per module maar één bestand inleveren. Bij informatica heb je vaak meerdere bestanden, bijvoorbeeld omdat je jouw code over meerdere bestanden hebt verdeeld, of omdat je bijvoorbeeld een eindproduct en een verslag in moet leveren. Om dat toch in te kunnen leveren, kun je de bestanden samenvoegen in een `.zip` bestand. Zie hieronder een uitleg voor jouw besturingssysteem.
 
 ## Windows 11
 1. Zorg dat alle bestanden die je in wilt leveren samen in een mapje staan.
@@ -11,7 +11,7 @@ In je [Q-Highschool portfolio](https://app.q-highschool.nl) kun je per module ma
 
    ![Het rechtermuisknop-menu nadat in de verkenner op het mapje is geklikt. De optie Comprimeren naar ZIP-bestand is geselecteerd.](assets/meerdere-bestanden-inleveren/win11-contextmenu.png)
    
-3. Er staat nu een `.zip` bestand in de map. Deze kun je inleveren in je Q-Highschool portfolio.
+3. Er staat nu een `.zip` bestand in de map. Deze kun je inleveren in je Q-vakken portfolio.
 
    ![Hetzelfde verkennerscherm als in de vorige afbeelding, met nu een nieuw bestand Project.zip](assets/meerdere-bestanden-inleveren/win11-zip.png)
    
@@ -21,7 +21,7 @@ In je [Q-Highschool portfolio](https://app.q-highschool.nl) kun je per module ma
  
  ![Het rechtermuisknop-menu van Windows 10, nadat in de verkenner op het mapje is geklikt. De optie Kopiëren naar > Gecomprimeerde (gezipte) map is geselecteerd.](assets/meerdere-bestanden-inleveren/win10-contextmenu.png)
  
-Je hebt nu een `.zip` bestand. Deze kun je inleveren in je Q-Highschool portfolio.
+Je hebt nu een `.zip` bestand. Deze kun je inleveren in je Q-vakken portfolio.
 
 <details>
     <summary>Voor fijnproevers: is dat niet een screenshot van Windows 11?</summary>
@@ -30,4 +30,4 @@ Je hebt nu een `.zip` bestand. Deze kun je inleveren in je Q-Highschool portfoli
 
 ## macOS
 
-Zorg dat alle bestanden samen in een mapje staan, en klik met de rechtermuisknop (of met twee vingers op je touchpad) op die map. Kies de optie *Comprimeer 'Naam van de map'* en je hebt een `.zip` bestand dat je kunt inleveren in je Q-Highschool portfolio. Kijk op [deze website](https://www.iculture.nl/tips/zip-bestanden-comprimeren-mac/) als je graag een screenshot wilt zien.
+Zorg dat alle bestanden samen in een mapje staan, en klik met de rechtermuisknop (of met twee vingers op je touchpad) op die map. Kies de optie *Comprimeer 'Naam van de map'* en je hebt een `.zip` bestand dat je kunt inleveren in je Q-vakken portfolio. Kijk op [deze website](https://www.iculture.nl/tips/zip-bestanden-comprimeren-mac/) als je graag een screenshot wilt zien.

@@ -65,7 +65,7 @@ def build_content():
 
     new_config = merge({}, config_base, config)
 
-    new_config["author"] = "Q-highschool + " + ", ".join(authors)
+    new_config["author"] = "Q-vak Informatica + " + ", ".join(authors)
     new_config["copyright"] = str(copyright_year)
 
     if not "sphinx" in new_config: new_config["sphinx"] = {}
@@ -174,6 +174,7 @@ for module in os.listdir(get_repo_path()):
 
             if suffix is not None:
                 new_ref_config["title"] = ref_config["title"] + f" ({suffix.capitalize()})"
+            new_ref_config["author"] = "Q-vak Informatica + " + ", ".join(authors)
             new_ref_config["copyright"] = str(copyright_year)
 
             if not "sphinx" in new_ref_config: new_ref_config["sphinx"] = {}

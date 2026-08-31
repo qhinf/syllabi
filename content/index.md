@@ -1,4 +1,4 @@
-# Q-highschool Informatica
+# Q-vak Informatica
 
 ```{tableofcontents}
 ```
