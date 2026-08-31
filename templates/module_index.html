@@ -9,9 +9,12 @@
     <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
-    <header>
-            <h1>{{ module.title }}</h1>
-            <p><a href="{{ module.versions[0].slug }}">Klik hier</a> voor de nieuwste versie.</p>
+    <header class="container">
+        <h1 class="logo"><img src="../q-vak-inf.svg" alt="Q-vak Informatica" /></h1>
+        <h2>{{ module.title }}</h2>
     </header>
+    <main class="container">
+        <p><a href="{{ module.versions[0].slug }}">Klik hier</a> voor de nieuwste versie.</p>
+    </main>
 </body>
 </html>
