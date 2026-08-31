@@ -172,7 +172,8 @@ for module in os.listdir(get_repo_path()):
 
             new_ref_config = merge({}, config_base, ref_config, strategy = Strategy.TYPESAFE_ADDITIVE)
 
-            new_ref_config["author"] = "Q-highschool + " + ", ".join(authors)
+            if suffix is not None:
+                new_ref_config["title"] = ref_config["title"] + f" ({suffix.capitalize()})"
             new_ref_config["copyright"] = str(copyright_year)
 
             if not "sphinx" in new_ref_config: new_ref_config["sphinx"] = {}
