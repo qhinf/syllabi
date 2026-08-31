@@ -9,24 +9,23 @@
 </head>
 <body>
     <header class="container">
-        <h1 class="logo"><img src="../q-vak-inf.svg" alt="Q-vak Informatica" /></h1>
+        <h1 class="logo"><img src="../../q-vak-inf.svg" alt="Q-vak Informatica" /></h1>
     </header>
     <main class="container">
         <h2>{{ module.title }} / {{ block.title }}</h2>
         <p>Kies jouw editie:</p>
         <div class="modules grid">
             {% for edition in block.editions %}
-                <li><a href="../{{ edition.slug }}">{{ edition.title }}</a></li>
                 <article data-title="{{ edition.title }}" data-slug="{{ edition.slug }}">
                     <header
                     {% if module.banner %}
-                        style="background-image: url({{ module.banner }});"
+                        style="background-image: url(../../{{ module.banner }});"
                     {% elif module.color %}
                         style="background-color: {{ module.color }};"
                     {% endif %}   
                     >
                     {% if module.logo %}
-                        <img class="logo" alt="Logo voor {{ module.title }}" src="{{ module.logo }}" />
+                        <img class="logo" alt="Logo voor {{ module.title }}" src="../../{{ module.logo }}" />
                     {% endif %}
                     </header>
                     <a href="../{{ edition.slug }}">
