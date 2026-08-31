@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ module.title }} - {{ block.title }}</title>
+    <link rel="stylesheet" type="text/css" href="../../pico.min.css">
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+<body>
+    <header>
+        <h1>{{ module.title }}</h1>
+        <p>{{ block.title }}</p>
+    </header>
+    <main>
+        <p>Er zijn meerdere edities van deze syllabus. Kies de editie die op jou van toepassing is:</p>
+        <ul>
+        {% for edition in block.editions %}
+            <li><a href="../{{ edition.slug }}">{{ edition.title }}</a></li>
+        {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

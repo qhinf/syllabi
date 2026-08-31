@@ -19,7 +19,12 @@ def get_repo_path(module: str | None = None, version: str | None = None) -> str:
     else:
         return path.join(syllabi_folder, module, version)
     
-year_block_pattern = re.compile(r"(\d{2})(\d{2})-(\d)")
+# Matches version folder names like "2425-3" or, for parallel editions,
+# "2425-3-suffix" (eg. "2425-3-havo")
+year_block_pattern = re.compile(r"^(\d{2})(\d{2})-(\d)(?:-(.+))?$")
+
+def format_block_title(year1: str, year2: str, block: str) -> str:
+    return f"{year1}/{year2} - Blok {block}"
 
 def get_commit_authors(commit: Commit):
     if commit.author.name is not None:
@@ -141,8 +146,14 @@ for module in os.listdir(get_repo_path()):
             ref_config = yaml.safe_load(ref_config_file)
 
         if (match := year_block_pattern.match(version)) is not None:
-            version_title = f"{match.group(1)}/{match.group(2)} - Blok {match.group(3)}"
+            year1, year2, block, suffix = match.groups()
+            block_slug = f"{year1}{year2}-{block}"
+            version_title = format_block_title(year1, year2, block)
+            if suffix is not None:
+                version_title += f" ({suffix.capitalize()})"
         else:
+            block_slug = version
+            suffix = None
             version_title = version
 
         needs_build = True
@@ -236,9 +247,7 @@ for module in os.listdir(get_repo_path()):
                     banner_build_path = path.join(jb_build_path, banner_path)
                     os.makedirs(path.dirname(banner_build_path), exist_ok = True)
                     shutil.copyfile(path.join(jb_path, ref_config["banner"]), banner_build_path)
-            versions.append({ "slug": version, "title": version_title })
-            if version != version_paths[-1]:
-                old_versions.append(f"/{module}/{version}/")
+            versions.append({ "slug": version, "title": version_title, "block_slug": block_slug, "suffix": suffix })
 
             print(f"[{module}/{version}] Copying HTML")
             shutil.rmtree(build_path, ignore_errors = True)
@@ -248,14 +257,56 @@ for module in os.listdir(get_repo_path()):
     with open(latest_version_file, mode="w", encoding="utf-8") as f:
         f.write(latest_version if latest_version else "")
 
-    versions.sort(key = lambda version: version["slug"], reverse = True)
+    # Group versions by their yyyy-b block, so that parallel editions of the
+    # same block (distinguished by a yyyy-b-suffix folder name) share a
+    # module_sub_index page from which the user picks their edition
+    version_groups = {}
+    group_order = []
+    for version_entry in versions:
+        key = version_entry["block_slug"]
+        if key not in version_groups:
+            version_groups[key] = []
+            group_order.append(key)
+        version_groups[key].append(version_entry)
+
+    grouped_versions = []
+    for key in group_order:
+        entries = version_groups[key]
+        if len(entries) == 1 and entries[0]["suffix"] is None:
+            entry = entries[0]
+            grouped_versions.append({ "slug": entry["slug"], "title": entry["title"] })
+        else:
+            if (match := year_block_pattern.match(key)) is not None:
+                block_title = format_block_title(*match.groups()[:3])
+            else:
+                block_title = key
+            grouped_versions.append({
+                "slug": key,
+                "title": block_title,
+                "editions": [
+                    {
+                        "slug": entry["slug"],
+                        "title": entry["suffix"].capitalize() if entry["suffix"] is not None else entry["title"]
+                    }
+                    for entry in entries
+                ]
+            })
+
+    grouped_versions.sort(key = lambda version: version["slug"], reverse = True)
+
+    # Everything outside the latest yyyy-b group is an old version
+    for old_version in grouped_versions[1:]:
+        old_versions.append(f"/{module}/{old_version['slug']}/")
+        for edition in old_version.get("editions", []):
+            old_versions.append(f"/{module}/{edition['slug']}/")
+
     modules.append({ 
         "slug": module,
         "title": module_title,
         "color": module_color,
         "logo": module_logo,
         "banner": module_banner,
-        "versions": versions
+        "versions": grouped_versions
     })
 
 modules.sort(key = lambda module: module["title"])
@@ -281,6 +332,19 @@ for module in modules:
     print(f"[{module['slug']}] Writing index.html")
     with open(path.join("_build", module["slug"], "index.html"), mode = "w") as module_index_file:
         module_index_file.write(module_index_template.render(module = module))
+
+# Create a module_sub_index page for every yyyy-b block that has parallel
+# editions, letting the user pick which edition they want
+module_sub_index_template = jinja_env.get_template("module_sub_index.html")
+for module in modules:
+    for block in module["versions"]:
+        if "editions" not in block:
+            continue
+        print(f"[{module['slug']}/{block['slug']}] Writing index.html")
+        block_dir = path.join("_build", module["slug"], block["slug"])
+        os.makedirs(block_dir, exist_ok = True)
+        with open(path.join(block_dir, "index.html"), mode = "w") as block_index_file:
+            block_index_file.write(module_sub_index_template.render(module = module, block = block))
 
 # Configure redirects for old paths
 redirects = [
