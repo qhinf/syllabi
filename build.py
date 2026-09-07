@@ -26,6 +26,12 @@ year_block_pattern = re.compile(r"^(\d{2})(\d{2})-(\d)(?:-(.+))?$")
 def format_block_title(year1: str, year2: str, block: str) -> str:
     return f"{year1}/{year2} - Blok {block}"
 
+def get_block_slug(version: str) -> str:
+    if (match := year_block_pattern.match(version)) is not None:
+        year1, year2, block, _ = match.groups()
+        return f"{year1}{year2}-{block}"
+    return version
+
 def get_commit_authors(commit: Commit):
     if commit.author.name is not None:
         yield commit.author.name
@@ -115,6 +121,8 @@ for module in os.listdir(get_repo_path()):
 
     version_paths = sorted(os.listdir(get_repo_path(module)))
     latest_version = version_paths[-1] if version_paths else None
+    # The latest yyyy-b block, so alternate editions of it are not treated as old
+    latest_block_slug = max((get_block_slug(v) for v in version_paths), default = None)
     latest_version_state_dir = path.join(build_state_dir, module)
     latest_version_file = path.join(latest_version_state_dir, "latest_version")
     latest_version_prev = None
@@ -182,7 +190,7 @@ for module in os.listdir(get_repo_path()):
             if not "myst_substitutions" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["myst_substitutions"] = {}
             new_ref_config["sphinx"]["config"]["myst_substitutions"]["versie"] = version_title
             new_ref_config["sphinx"]["config"]["myst_substitutions"]["titel"] = new_ref_config["title"]
-            if version != version_paths[-1]:
+            if block_slug != latest_block_slug:
                 if not "html_theme_options" in new_ref_config["sphinx"]["config"]: new_ref_config["sphinx"]["config"]["html_theme_options"] = {}
                 new_ref_config["sphinx"]["config"]["html_theme_options"]["announcement"] = \
                     f"Let op: dit is een oude versie van deze syllabus voor {version_title}."
