@@ -386,3 +386,7 @@
 	path = syllabi/security/2627-2
 	url = https://github.com/qhinf/security_syllabus.git
 	branch = 2627-2
+[submodule "databases/2627-2"]
+	path = syllabi/databases/2627-2
+	url = https://github.com/qhinf/databases_syllabus.git
+	branch = 2627-2
